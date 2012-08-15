@@ -68,7 +68,6 @@
                         hand.animate({arc: [value, total, R]}, 900, ">");
                     } else {
                         if (!value || value == total) {
-                            value = total;
                             hand.animate({arc: [value, total, R]}, 750, "bounce", function () {
                                 hand.attr({arc: [0, total, R]});
                             });
