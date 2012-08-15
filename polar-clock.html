@@ -56,21 +56,12 @@
                 html[5].style.color = Raphael.hsb2rgb(15 / 200, 1, .75).hex;
 
                 function updateVal(value, total, R, hand, id) {
-                    if (total == 31) { // month
-                        var d = new Date;
-                        d.setDate(1);
-                        d.setMonth(d.getMonth() + 1);
-                        d.setDate(-1);
-                        total = d.getDate();
-                    }
                     var color = "hsb(".concat(Math.round(R) / 200, ",", value / total, ", .75)");
                     if (init) {
                         hand.animate({arc: [value, total, R]}, 900, ">");
                     } else {
                         if (!value || value == total) {
-                            hand.animate({arc: [value, total, R]}, 750, "bounce", function () {
-                                hand.attr({arc: [0, total, R]});
-                            });
+                            hand.animate({arc: [value, total, R]}, 750, "bounce");
                         } else {
                             hand.animate({arc: [value, total, R]}, 750, "elastic");
                         }
@@ -102,7 +93,7 @@
                 (function () {
                     var d = new Date,
                         am = (d.getHours() < 12),
-                        h = d.getHours() % 12 || 12;
+                        h = Math.round(d.getHours() % 12) || 12;
                     updateVal(d.getSeconds(), 60, 200, sec, 2);
                     updateVal(d.getMinutes(), 60, 160, min, 1);
                     updateVal(h, 12, 120, hor, 0);
