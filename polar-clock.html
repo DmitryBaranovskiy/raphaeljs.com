@@ -68,7 +68,10 @@
                         hand.animate({arc: [value, total, R]}, 900, ">");
                     } else {
                         if (!value || value == total) {
-                            value = total;
+                            // caused minute/second hands to bounce when they reset to 0
+                            // because they set to 60, where they wobbles for a whole second/minute respectively
+                            // all others are properly adjusted below inside the anonymous init function
+                            // value = total;
                             hand.animate({arc: [value, total, R]}, 750, "bounce", function () {
                                 hand.attr({arc: [0, total, R]});
                             });
